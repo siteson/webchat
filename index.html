@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>聊天室</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="plugins/adminlte/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style type="text/css">
+    /* 聊天窗口布局 */
+    .chatbox{
+        margin: auto;
+        height: 500px;
+    }
+    /* 聊天消息高度适配 */
+    .direct-chat-messages{
+        height: auto;
+    }
+    .direct-chat-contacts{
+        height: auto;
+    }
+    /* 右边的消息 */
+    .right{
+        float: right;
+    }
+    /* 时间戳 */
+    .direct-chat-timestamp{
+        margin:0 0.5em;
+    }
+    </style>
+</head>
+<body>
+    <!-- DIRECT CHAT -->
+    <div class="card direct-chat direct-chat-primary chatbox col-lg-6 col-md-8">
+        <div class="card-header">
+            <h3 class="card-title">Direct Chat</h3>
+            <div class="card-tools">
+            <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
+                    data-widget="chat-pane-toggle">
+                <i class="fas fa-comments"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+            </button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages">
+                <!-- Message. Default to the left -->
+                <div class="direct-chat-msg col-md-8 col-10">
+                    <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-left">Alexander Pierce</span>
+                    <span class="direct-chat-timestamp float-left">23 Jan 2:00 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                    Is this template really for free? That's unbelievable!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+                <!-- Message to the right -->
+                <div class="direct-chat-msg right col-md-8 col-10">
+                    <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-right">Sarah Bullock</span>
+                    <span class="direct-chat-timestamp float-right">23 Jan 2:05 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                    You better believe it!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+            </div>
+            <!--/.direct-chat-messages-->
+
+            <!-- Contacts are loaded here -->
+            <div class="direct-chat-contacts">
+            <ul class="contacts-list">
+                <li>
+                <a href="#">
+                    <img class="contacts-list-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3">
+
+                    <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                        Count Dracula
+                        <small class="contacts-list-date float-right">2/28/2015</small>
+                    </span>
+                    <span class="contacts-list-msg">How have you been? I was...</span>
+                    </div>
+                    <!-- /.contacts-list-info -->
+                </a>
+                </li>
+                <!-- End Contact Item -->
+                <li>
+                <a href="#">
+                    <img class="contacts-list-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3">
+
+                    <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                        Sarah Doe
+                        <small class="contacts-list-date float-right">2/23/2015</small>
+                    </span>
+                    <span class="contacts-list-msg">I will be waiting for...</span>
+                    </div>
+                    <!-- /.contacts-list-info -->
+                </a>
+                </li>
+                <!-- End Contact Item -->
+                <li>
+                <a href="#">
+                    <img class="contacts-list-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3">
+
+                    <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                        Nadia Jolie
+                        <small class="contacts-list-date float-right">2/20/2015</small>
+                    </span>
+                    <span class="contacts-list-msg">I'll call you back at...</span>
+                    </div>
+                    <!-- /.contacts-list-info -->
+                </a>
+                </li>
+                <!-- End Contact Item -->
+                <li>
+                <a href="#">
+                    <img class="contacts-list-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3">
+
+                    <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                        Nora S. Vans
+                        <small class="contacts-list-date float-right">2/10/2015</small>
+                    </span>
+                    <span class="contacts-list-msg">Where is your new...</span>
+                    </div>
+                    <!-- /.contacts-list-info -->
+                </a>
+                </li>
+                <!-- End Contact Item -->
+                <li>
+                <a href="#">
+                    <img class="contacts-list-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3">
+
+                    <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                        John K.
+                        <small class="contacts-list-date float-right">1/27/2015</small>
+                    </span>
+                    <span class="contacts-list-msg">Can I take a look at...</span>
+                    </div>
+                    <!-- /.contacts-list-info -->
+                </a>
+                </li>
+                <!-- End Contact Item -->
+            </ul>
+            <!-- /.contacts-list -->
+            </div>
+            <!-- /.direct-chat-pane -->
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <form action="#" method="post">
+            <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-append">
+                <button type="button" class="btn btn-primary">Send</button>
+                </span>
+            </div>
+            </form>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!--/.direct-chat -->
+      
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="plugins/adminlte/js/adminlte.js"></script>
+<!-- PAGE SCRIPTS -->
+<script type="text/javascript">
+   
+</script>
+</body>
+</html>
