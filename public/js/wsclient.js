@@ -9,7 +9,7 @@ $(document).ready(function () {
       dx = dc ? dd: db,
       ec = encodeURIComponent;
 
-    var host = "ws://localhost:8080/";
+    var host = "ws://"+location.hostname+":"+location.port;
   w.CHAT = {
       msgObj:d.getElementById("message"),
       screenheight:w.innerHeight ? w.innerHeight : dx.clientHeight,

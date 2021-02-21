@@ -9,12 +9,11 @@ app.get('/', function(req, res){
     res.redirect('/public/');
 });
 // 监听端口
-var server = app.listen(8080,'localhost', function () {
-    var host = server.address().address;
+var server = app.listen(8080, function () {
     var port = server.address().port;
-    console.log("聊天室demo，访问地址为 http://%s:%s", host, port)
+    console.log("聊天室demo，listening on *:%s", port);
   });
-io = io.listen(server);
+io = io.listen(server, { cors: true });
  
 
 //在线用户
