@@ -25,20 +25,6 @@ $(document).ready(function () {
           //this.socket.disconnect();
           location.reload();
       },
-      //提交聊天消息内容
-      submit:function(){
-          var content = d.getElementById("content").value;
-          if(content != ''){
-              var obj = {
-                  userid: this.userid,
-                  username: this.username,
-                  content: content
-              };
-              this.socket.emit('message', obj);
-              d.getElementById("content").value = '';
-          }
-          return false;
-      },
       genUid:function(){
           return new Date().getTime()+""+Math.floor(Math.random()*899+100);
       },
@@ -130,6 +116,20 @@ $(document).ready(function () {
             d.getElementById("loginbox").style.display = 'none';
             d.getElementById("chatbox").style.display = 'block';
             CHAT.init(username);
+        }
+        return false;
+    });
+    //提交聊天消息内容
+    $('#mjr_send').click( function(){
+        var content = d.getElementById("content").value;
+        if(content != ''){
+            var obj = {
+                userid: CHAT.userid,
+                username: CHAT.username,
+                content: content
+            };
+            CHAT.socket.emit('message', obj);
+            d.getElementById("content").value = '';
         }
         return false;
     });

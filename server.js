@@ -2,12 +2,21 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
- 
+// 路由
 app.use('/public', express.static('public'));
+app.use('/node_modules/socket.io/client-dist', express.static('node_modules/socket.io/client-dist'))
 app.get('/', function(req, res){
     res.redirect('/public/');
 });
+// 监听端口
+var server = app.listen(8080,'localhost', function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("聊天室demo，访问地址为 http://%s:%s", host, port)
+  });
+io = io.listen(server);
  
+
 //在线用户
 var onlineUsers = {};
 //当前在线人数
@@ -59,9 +68,3 @@ io.on('connection', function(socket){
     });
    
 });
- 
-var server = app.listen(8080,'localhost', function () {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log("聊天室demo，访问地址为 http://%s:%s", host, port)
-  })  
