@@ -8,11 +8,11 @@
  ***************************************************************/
 
 window.CHAT = {
-    socket: null,
     userid: null,
     username: null,
     avatar: null,
 
+    socket: null,
     // 公共空间
     init: function(){
         // var host = "ws://"+location.hostname+":"+location.port;
@@ -40,22 +40,14 @@ window.CHAT = {
             $("#count").text("（"+onlineUsers.length+"人在线）");
         });
 
-        //监听消息发送
-        pub_space.on('message', function(obj){
-            var isme = (obj.userid == CHAT.userid) ? true : false;
-            var contentDiv = '<div>'+obj.content+'</div>';
-            var usernameDiv = '<span>'+obj.username+'</span>';
-
-            var section = d.createElement('section');
-            if(isme){
-                section.className = 'user';
-                section.innerHTML = contentDiv + usernameDiv;
-            } else {
-                section.className = 'service';
-                section.innerHTML = usernameDiv + contentDiv;
+        //监听用户消息
+        pub_space.on('message', function(msg){
+            if(msg.userid != this.userid){
+                getMessage({
+                    username: this.username,
+                    avatar: this.avatar
+                },msg.message);
             }
-            CHAT.msgObj.appendChild(section);
-            CHAT.scrollToBottom();
         });
     },
 
@@ -65,24 +57,36 @@ window.CHAT = {
         if (msg){
             if(this.username === null){
                 this.username = msg;
+                this.avatar = getAcatar();
                 this.init();
             }
             else{
+                // message 数据结构
                 this.socket.emit('message', {
                     userid: this.userid,
                     message: msg
                 });
-
+                sendMessage({
+                    username: this.username,
+                    avatar: this.avatar
+                },msg);
             }
         }
         return false;
     }
 }
 
-// UI
+
+function getAcatar(){
+    url = "http://api.btstu.cn/sjtx/api.php?lx=c3&format=images";
+    $.get(url,function(res){
+        return res.imgurl;
+    });
+}
 function systemMessage(msg){
     $("#messagebox").append("<div class='chat-line system-message'>"+msg+"</div>");
 }
+// @param user {username:string, avatar:string}
 function sendMessage(user,message){
     var datetime = (new Date()).Format("hh:mm");
     var sendmsg = "\
@@ -95,12 +99,25 @@ function sendMessage(user,message){
         user.avatar +
         "' alt='message user image'><div class='direct-chat-text'>"+
         message +
-        "</div></div></div>\
-    "
+        "</div></div></div>"
     $("#messagebox").append(sendmsg);
+    $("#messagebox").scrollTop(this.scrollHeight);
 }
 function getMessage(user,message){
-    
+    var datetime = (new Date()).Format("hh:mm");
+    var sendmsg = "\
+    <div class='chat-line'><div class='direct-chat-msg left textwidth'>\
+        <div class='direct-chat-infos clearfix'><span class='direct-chat-name float-left'>"+
+        user.username +
+        "</span><span class='direct-chat-timestamp float-left'>"+
+        datetime +
+        "</span></div><img class='direct-chat-img' src='"+
+        user.avatar +
+        "' alt='message user image'><div class='direct-chat-text'>"+
+        message +
+        "</div></div></div>"
+    $("#messagebox").append(sendmsg);
+    $("#messagebox").scrollTop(this.scrollHeight);
 }
 
 $(document).onload(function(){
@@ -111,4 +128,4 @@ $(document).onload(function(){
 });
 $("#submit").click(function(){
     return CHAT.submit();
-})
+});

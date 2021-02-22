@@ -23,14 +23,14 @@ pub_space.on('connection', function(socket){
     // 用户加入，自定义事件
     socket.on('login',function(user){
         if(!onlineUsers.hasOwnProperty(socket.id)) {
-            //在线用户定义
+            //onlineUsers 数据结构
             onlineUsers[socket.id] = {
                 username: user.username,
                 avatar: user.avatar
             }
         }
         pub_space.broadcast.to(socket.id).emit('attend', onlineUsers);
-        console.log('['+onlineUsers[socket.id]+']加入了公共大厅');
+        console.log('['+onlineUsers[socket.id].username+']加入了公共大厅');
     });
     // 用户退出
     socket.on('disconnect', function(){
@@ -38,12 +38,12 @@ pub_space.on('connection', function(socket){
             delete onlineUsers[socket.id];
         }
         pub_space.broadcast.to(socket.id).emit('exit', onlineUsers);
-        console.log('['+onlineUsers[socket.id]+']退出了公共大厅');
+        console.log('['+onlineUsers[socket.id].username+']退出了公共大厅');
     });
-    // 用户消息，自定义事件
-    socket.on('message', function(obj){
-        pub_space.to(socket.id).emit('message', obj);
-        console.log(obj.username+'说：'+obj.content);
+    // 消息转发，自定义事件
+    socket.on('message', function(msg){
+        pub_space.to(socket.id).emit('message', msg);
+        console.log(onlineUsers[msg.userid].username+'说：'+msg.message);
     });
 });
    
