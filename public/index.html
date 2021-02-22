@@ -58,25 +58,39 @@
         .direct-chat-timestamp{
             margin:0 0.5em;
         }
+        /* 系统消息 */
+        .system-message{
+            text-align: center;
+            background-color: #ebebeb;
+            font-size: 14px;
+            padding: 5px;
+            margin: 5px auto;
+            border-radius:5px;
+        }
     </style>
 </head>
 <body>
     <!-- DIRECT CHAT -->
     <div class="card direct-chat direct-chat-primary chatbox col-lg-6 col-md-8">
         <div class="card-header">
-            <h3 class="card-title">会话大厅</h3>
+            <h3 id="title" class="card-title">会话大厅</h3>
+            <span id="count" class="text-muted float-left">(3人在线)</span>
             <div class="card-tools">
             <button type="button" class="btn btn-tool" data-toggle="tooltip" title="联系人"
                     data-widget="chat-pane-toggle">
                 <i class="fas fa-comments"></i>
-                <span class="badge badge-primary">3人在线</span>
+                <span class="badge badge-primary">3</span>
             </button>
             </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
             <!-- Conversations are loaded here -->
-            <div class="direct-chat-messages">
+            <div id="messagebox" class="direct-chat-messages">
+                <div class="chat-line system-message">
+                    欢迎来到聊天室，开始之前请先输入您的昵称，随便编一个就行
+                </div>
+
                 <!-- Message. Default to the left -->
                 <div class="chat-line">
                 <div class="direct-chat-msg left textwidth">
@@ -88,7 +102,7 @@
                     <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
-                    Is this template really for free? That's unbelievable!
+                    长一点的测试文本要长一点，最好出现自动换行那么长
                     </div>
                     <!-- /.direct-chat-text -->
                 </div>
@@ -106,7 +120,7 @@
                     <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
-                    You better believe it!
+                    短一点的测试文本
                     </div>
                     <!-- /.direct-chat-text -->
                 </div>
@@ -182,12 +196,12 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <form action="#" method="post">
+            <form action="javascript:;" method="post">
             <div class="input-group">
-                <input type="text" name="message" placeholder="来说点什么吧" class="form-control" 
+                <input id="message" type="text" placeholder="来说点什么吧" class="form-control" 
                     autocomplete="off" autofocus="autofocus">
                 <span class="input-group-append">
-                <button type="button" class="btn btn-primary">发送</button>
+                <input id="submit" type="submit" class="btn btn-primary" value="发送">
                 </span>
             </div>
             </form>
@@ -198,14 +212,34 @@
       
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="plugins/adminlte/js/adminlte.js"></script>
+<!-- socket.io -->
+<script src="../node_modules/socket.io/client-dist/socket.io.min.js"></script>
 <!-- PAGE SCRIPTS -->
-<script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
 <script src="js/wsclient.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        if($(window).width() <= 992){
+            var height = $(window).height();
+            $(".chatbox").css("height",height);
+            $(":text").click(function(){
+                $(".chatbox").css("height","calc(100vh)");
+            });
+            $(":text").blur(function(){
+                $(".chatbox").css("height",height);
+            })
+        }
+    });
+    $("input").click(function(){
+        if($(".direct-chat").hasClass("direct-chat-contacts-open"))
+        $(".direct-chat").removeClass("direct-chat-contacts-open");
+    });
+    $("button[data-toggle='tooltip']").click(function(){
+        if($(".direct-chat").hasClass("direct-chat-contacts-open"))
+        $(".direct-chat").removeClass("direct-chat-contacts-open");
+        else $(".direct-chat").addClass("direct-chat-contacts-open");
+    })
+</script>
 </body>
 </html>
