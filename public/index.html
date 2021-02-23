@@ -40,7 +40,6 @@
         /* 消息窗口布局 */
         .direct-chat-messages{
             height: auto;
-            overflow: hidden;
         }
         .direct-chat-contacts{
             height: auto;
@@ -55,6 +54,12 @@
         .right{
             float: right;
         }
+        .right.direct-chat-text{
+            margin: 3px 10px 0 0;
+        }
+        .left.direct-chat-text{
+            margin: 3px 0 0 10px;
+        }
         /* 时间戳 */
         .direct-chat-timestamp{
             margin:0 0.5em;
@@ -62,11 +67,12 @@
         /* 系统消息 */
         .system-message{
             text-align: center;
-            background-color: #ebebeb;
+            /* background-color: #ebebeb;
+            border-radius:5px; */
+            color: #5e5e5e;
             font-size: 14px;
             padding: 5px;
             margin: 5px auto;
-            border-radius:5px;
         }
     </style>
 </head>
@@ -74,8 +80,8 @@
     <!-- DIRECT CHAT -->
     <div class="card direct-chat direct-chat-primary chatbox col-lg-6 col-md-8">
         <div class="card-header">
-            <h3 id="title" class="card-title">会话大厅</h3>
-            <span id="count" class="text-muted float-left">(3人在线)</span>
+            <h3 id="title" class="card-title">系统会话</h3>
+            <span id="count" class="text-muted float-left"></span>
             <div class="card-tools">
             <button type="button" class="btn btn-tool" data-toggle="tooltip" title="联系人"
                     data-widget="chat-pane-toggle">
@@ -88,46 +94,6 @@
         <div class="card-body">
             <!-- Conversations are loaded here -->
             <div id="messagebox" class="direct-chat-messages">
-                <div class="chat-line system-message">
-                    欢迎来到聊天室，开始之前请先输入您的昵称，随便编一个就行
-                </div>
-
-                <!-- Message. Default to the left -->
-                <div class="chat-line">
-                <div class="direct-chat-msg left textwidth">
-                    <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name float-left">Alexander Pierce</span>
-                    <span class="direct-chat-timestamp float-left">23 Jan 2:00 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                    长一点的测试文本要长一点，最好出现自动换行那么长
-                    </div>
-                    <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-                </div>
-
-                <!-- Message to the right -->
-                <div class="chat-line">
-                <div class="direct-chat-msg right textwidth">
-                    <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name float-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp float-right">23 Jan 2:05 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="https://api.sunweihu.com/api/sjtx/api.php?lx=c3" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                    短一点的测试文本
-                    </div>
-                    <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-                </div>
-
             </div>
             <!--/.direct-chat-messages-->
 

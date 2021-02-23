@@ -19,33 +19,36 @@ window.CHAT = {
         // this.socket = io.connect(host);
         const pub_space = io();
         this.socket = pub_space;
-        pub_space.on("connect", (socket) => {
-            this.userid = socket.id;
+        pub_space.on("connect", () => {
+            this.userid = pub_space.id;
+            // 加入会话
+            if(this.userid!=null && this.username!=null)
+            pub_space.emit('login', {
+                username: this.username,
+                avatar: this.avatar
+            });
+            $("#title").text("公共空间");
+            $("#message").attr("placeholder" , "来说点什么吧");
         })
-        // 加入会话
-        if(this.userid!=null && this.username!=null)
-        pub_space.emit('login', {
-            username: this.username,
-            avatar: this.avatar
-        });
 
         // 监听用户加入
-        pub_space.on('attend', function(onlineUsers){
-            systemMessage("欢迎["+onlineUsers[this.userid].username+"]加入会话");
-            $("#count").text("（"+onlineUsers.length+"人在线）");
+        pub_space.on('attend', (user, count)=>{
+            systemMessage("欢迎["+user+"]加入会话");
+            $("#count").text("（"+count+"人在线）");
         });
 
         //监听用户退出
-        this.pub_space.on('exit', function(onlineUsers){
-            $("#count").text("（"+onlineUsers.length+"人在线）");
+        pub_space.on('exit', (user, count)=>{
+            systemMessage("["+user+"]退出了会话");
+            $("#count").text("（"+count+"人在线）");
         });
 
         //监听用户消息
-        pub_space.on('message', function(msg){
+        pub_space.on('message', (msg)=>{
             if(msg.userid != this.userid){
                 getMessage({
-                    username: this.username,
-                    avatar: this.avatar
+                    username: msg.username,
+                    avatar: msg.avatar
                 },msg.message);
             }
         });
@@ -58,12 +61,18 @@ window.CHAT = {
             if(this.username === null){
                 this.username = msg;
                 this.avatar = getAcatar();
+                sendMessage({
+                    username: this.username,
+                    avatar: this.avatar
+                },msg);
                 this.init();
             }
             else{
                 // message 数据结构
                 this.socket.emit('message', {
                     userid: this.userid,
+                    username: this.username,
+                    avatar: this.avatar,
                     message: msg
                 });
                 sendMessage({
@@ -72,23 +81,42 @@ window.CHAT = {
                 },msg);
             }
         }
+        $('#message').val("");
         return false;
     }
 }
 
 
 function getAcatar(){
-    url = "http://api.btstu.cn/sjtx/api.php?lx=c3&format=images";
-    $.get(url,function(res){
-        return res.imgurl;
+    var src = null;
+    $.ajax({
+        type: "GET",
+        url: "https://api.uomg.com/api/rand.avatar?sort=动漫男&format=json",
+        async: false,   // 同步请求
+        success: (response) => {
+            src = JSON.parse(response).imgurl;
+        }
     });
+    return src;
 }
 function systemMessage(msg){
     $("#messagebox").append("<div class='chat-line system-message'>"+msg+"</div>");
 }
+function timestemp(){
+    var date = new Date();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+    if (minute < 10) {
+        minute = "0" + minute;
+    }
+    return hour+":"+minute;
+}
 // @param user {username:string, avatar:string}
 function sendMessage(user,message){
-    var datetime = (new Date()).Format("hh:mm");
+    var datetime = timestamp();
     var sendmsg = "\
         <div class=chat-line><div class='direct-chat-msg right textwidth'>\
         <div class='direct-chat-infos clearfix'><span class='direct-chat-name float-right'>"+
@@ -97,14 +125,16 @@ function sendMessage(user,message){
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div class='direct-chat-text'>"+
+        "' alt='message user image'><div class='right direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
-    $("#messagebox").scrollTop(this.scrollHeight);
+    var scrool = document.getElementById('messagebox');
+    scrool.scrollTop = scrool.scrollHeight;
 }
+// @param user {username:string, avatar:string}
 function getMessage(user,message){
-    var datetime = (new Date()).Format("hh:mm");
+    var datetime = timestamp();
     var sendmsg = "\
     <div class='chat-line'><div class='direct-chat-msg left textwidth'>\
         <div class='direct-chat-infos clearfix'><span class='direct-chat-name float-left'>"+
@@ -113,14 +143,14 @@ function getMessage(user,message){
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div class='direct-chat-text'>"+
+        "' alt='message user image'><div class='left direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
-    $("#messagebox").scrollTop(this.scrollHeight);
+    $("#messagebox").scrollTo(0, this.clientHeight);
 }
 
-$(document).onload(function(){
+$(document).ready(function(){
     $("#title").text("系统会话");
     $("#count").text("");
     $("#message").attr("placeholder" , "请输入你的昵称");
