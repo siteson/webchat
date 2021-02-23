@@ -6,9 +6,12 @@
 
 **体验成品小样：** 
 
+![Desktop view]("https://github.com/siteson/webchat/blob/main/readme_image/desktop.png")
+![Mobile view]("https://github.com/siteson/webchat/blob/main/readme_image/phone.png")
+
 <br>
 
-# 部署步骤：
+## 部署步骤：
 
 ### 通过 [NPM](https://www.npmjs.com/) 安装生产环境
 `$ npm i`
@@ -21,7 +24,7 @@
 
 <br>
 
-# 文件说明：
+## 文件说明：
 |   文件            |   说明    |   备注    |
 |   :----            |   :----    | :---- |
 |   server.node.js  |  服务端   |  同时负责http和ws协议的路由、广播、监听
