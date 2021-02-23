@@ -8,7 +8,7 @@
 
 ![Desktop view](readme_image/desktop.png)
 
-![Mobile view](readme_image/phone.jpg =54x114)
+<img src="readme_image/phone.jpg" align="Mobile view" height="114" width="54" >
 
 <br>
 
