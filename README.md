@@ -4,7 +4,9 @@
 
 这是一个使用 node.js 编写的全双工通信聊天室，会话大厅已经完成，私聊 room 的细节还未完善，有空会继续编写。相关技术逻辑请查阅 [socket.io](https://socket.io/docs/v3)
 
-**体验成品小样：** 
+<br>
+
+**体验成品小样：** http://chat.sixiang.ink:8080/
 
 ![Desktop view](readme_image/desktop.png)
 
