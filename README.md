@@ -6,9 +6,9 @@
 
 **体验成品小样：** 
 
-![Desktop view]("readme_image/desktop.png")
+![Desktop view](readme_image/desktop.png)
 
-![Mobile view]("readme_image/phone.png")
+![Mobile view](readme_image/phone.png)
 
 <br>
 
