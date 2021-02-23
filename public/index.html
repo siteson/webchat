@@ -15,7 +15,6 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style type="text/css">
-        /* 背景 */
         body{
             background-image: linear-gradient(#ececec, #c2c2c2);
         }
@@ -198,6 +197,13 @@
             })
         }
     });
+    $('.card-body').overlayScrollbars({
+        className: "os-theme-none",
+        overflowBehavior: {
+            x: "hidden",
+            y: "scroll"
+        }
+    }); 
     $("input").click(function(){
         if($(".direct-chat").hasClass("direct-chat-contacts-open"))
         $(".direct-chat").removeClass("direct-chat-contacts-open");

@@ -102,7 +102,7 @@ function getAcatar(){
 function systemMessage(msg){
     $("#messagebox").append("<div class='chat-line system-message'>"+msg+"</div>");
 }
-function timestemp(){
+function timestamp(){
     var date = new Date();
     var hour = date.getHours();
     var minute = date.getMinutes();
@@ -113,6 +113,11 @@ function timestemp(){
         minute = "0" + minute;
     }
     return hour+":"+minute;
+}
+function scrollToBattom(name){
+    var obj = document.getElementsByName(name);
+    var last = obj.length -1;
+    obj[last].scrollIntoView(false);
 }
 // @param user {username:string, avatar:string}
 function sendMessage(user,message){
@@ -125,12 +130,11 @@ function sendMessage(user,message){
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div class='right direct-chat-text'>"+
+        "' alt='message user image'><div name='messages' class='right direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
-    var scrool = document.getElementById('messagebox');
-    scrool.scrollTop = scrool.scrollHeight;
+    scrollToBattom("messages");
 }
 // @param user {username:string, avatar:string}
 function getMessage(user,message){
@@ -143,11 +147,11 @@ function getMessage(user,message){
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div class='left direct-chat-text'>"+
+        "' alt='message user image'><div name='messages' class='left direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
-    $("#messagebox").scrollTo(0, this.clientHeight);
+    scrollToBattom("messages");
 }
 
 $(document).ready(function(){
