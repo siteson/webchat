@@ -9,7 +9,7 @@ app.get('/', function(req, res){
     res.redirect('/public/');
 });
 // 监听端口
-var server = app.listen(8080, function () {
+var server = app.listen(88, function () {
     var port = server.address().port;
     console.log("聊天室demo，listening on *:%s", port);
   });

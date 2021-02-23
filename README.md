@@ -6,7 +6,7 @@
 
 <br>
 
-**体验成品小样：** http://chat.sixiang.ink:8080/
+**体验成品小样：** http://chat.sixiang.ink:88/
 
 ![Desktop view](readme_image/desktop.png)
 
@@ -23,7 +23,7 @@
 `$ node server.node.js`
 
 ### 访问客户端
-`http://localhost:8080`
+`http://localhost:88`
 
 <br>
 
