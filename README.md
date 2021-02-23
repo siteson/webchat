@@ -6,9 +6,9 @@
 
 **体验成品小样：** 
 
-![Desktop view]("https://github.com/siteson/webchat/raw/main/readme_image/desktop.png")
+![Desktop view]("readme_image/desktop.png")
 
-![Mobile view]("https://github.com/siteson/webchat/raw/main/readme_image/phone.png")
+![Mobile view]("readme_image/phone.png")
 
 <br>
 
