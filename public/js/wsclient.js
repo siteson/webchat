@@ -86,12 +86,12 @@ window.CHAT = {
     }
 }
 
-
+// 头像
 function getAcatar(){
     var src = null;
     $.ajax({
         type: "GET",
-        url: "https://api.uomg.com/api/rand.avatar?sort=动漫男&format=json",
+        url: "https://api.uomg.com/api/rand.avatar?sort=动漫女&format=json",
         async: false,   // 同步请求
         success: (response) => {
             src = JSON.parse(response).imgurl;
