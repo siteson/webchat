@@ -8,7 +8,7 @@
 
 ![Desktop view](readme_image/desktop.png)
 
-![Mobile view](readme_image/phone.png)
+![Mobile view](readme_image/phone.jpg)
 
 <br>
 
