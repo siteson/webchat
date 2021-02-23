@@ -100,7 +100,8 @@ function getAcatar(){
     return src;
 }
 function systemMessage(msg){
-    $("#messagebox").append("<div class='chat-line system-message'>"+msg+"</div>");
+    $("#messagebox").append("<div name='messages' class='chat-line system-message'>"+msg+"</div>");
+    scrollToBattom("messages");
 }
 function timestamp(){
     var date = new Date();
@@ -123,14 +124,14 @@ function scrollToBattom(name){
 function sendMessage(user,message){
     var datetime = timestamp();
     var sendmsg = "\
-        <div class=chat-line><div class='direct-chat-msg right textwidth'>\
+        <div name='messages' class=chat-line><div class='direct-chat-msg right textwidth'>\
         <div class='direct-chat-infos clearfix'><span class='direct-chat-name float-right'>"+
         user.username +
         "</span><span class='direct-chat-timestamp float-right'>"+
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div name='messages' class='right direct-chat-text'>"+
+        "' alt='message user image'><div class='direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
@@ -140,14 +141,14 @@ function sendMessage(user,message){
 function getMessage(user,message){
     var datetime = timestamp();
     var sendmsg = "\
-    <div class='chat-line'><div class='direct-chat-msg left textwidth'>\
+        <div name='messages' class='chat-line'><div class='direct-chat-msg left textwidth'>\
         <div class='direct-chat-infos clearfix'><span class='direct-chat-name float-left'>"+
         user.username +
         "</span><span class='direct-chat-timestamp float-left'>"+
         datetime +
         "</span></div><img class='direct-chat-img' src='"+
         user.avatar +
-        "' alt='message user image'><div name='messages' class='left direct-chat-text'>"+
+        "' alt='message user image'><div class='direct-chat-text'>"+
         message +
         "</div></div></div>"
     $("#messagebox").append(sendmsg);
